@@ -6,7 +6,7 @@ import '../controllers/register_controller.dart';
 
 class RegisterView extends GetView<RegisterController> {
   @override
- Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('REGISTER'),
@@ -48,20 +48,20 @@ class RegisterView extends GetView<RegisterController> {
           Obx(
             () => ElevatedButton(
               style: ElevatedButton.styleFrom(
+                fixedSize: Size(200, 50),
                 primary: Colors.green,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(50),
                 ),
               ),
               onPressed: () {
-                if(controller.isLoading.isFalse)
-                {
+                if (controller.isLoading.isFalse) {
                   // Eksekusi Register
+                  controller.signUp();
                 }
               },
               child: Text(
-                controller.isLoading.isFalse ?
-                "REGISTER" : "LOADING....",
+                controller.isLoading.isFalse ? "REGISTER" : "LOADING....",
                 style: TextStyle(
                   fontSize: 30,
                   color: Colors.white,

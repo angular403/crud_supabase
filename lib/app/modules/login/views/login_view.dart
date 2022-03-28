@@ -1,3 +1,4 @@
+import 'package:crud_supbase/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -48,26 +49,30 @@ class LoginView extends GetView<LoginController> {
           Obx(
             () => ElevatedButton(
               style: ElevatedButton.styleFrom(
+                fixedSize: Size(200, 50),
                 primary: Colors.green,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(50),
                 ),
               ),
               onPressed: () {
-                if(controller.isLoading.isFalse)
-                {
+                if (controller.isLoading.isFalse) {
                   // Eksekusi Login
                 }
               },
               child: Text(
-                controller.isLoading.isFalse ?
-                "LOGIN" : "LOADING....",
+                controller.isLoading.isFalse ? "LOGIN" : "LOADING....",
                 style: TextStyle(
                   fontSize: 30,
                   color: Colors.white,
                 ),
               ),
             ),
+          ),
+          SizedBox(height: 10),
+          TextButton(
+            onPressed: () => Get.toNamed(Routes.REGISTER),
+            child: Text("Register"),
           ),
         ],
       ),
