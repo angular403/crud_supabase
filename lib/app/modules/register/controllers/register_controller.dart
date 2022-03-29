@@ -29,7 +29,7 @@ class RegisterController extends GetxController {
         print(response.rawData);
         
         // Tanpa fitur email vertification
-        Get.offAllNamed(Routes.HOME);
+        Get.offAllNamed(Routes.LOGIN);
 
         // Get.defaultDialog(
         //   barrierDismissible: false,

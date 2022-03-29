@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controllers/login_controller.dart';
+import '../../../controllers/auth_controller.dart';
 
 class LoginView extends GetView<LoginController> {
+  final authC = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,9 +57,14 @@ class LoginView extends GetView<LoginController> {
                   borderRadius: BorderRadius.circular(50),
                 ),
               ),
-              onPressed: () {
+              onPressed: () async {
                 if (controller.isLoading.isFalse) {
                   // Eksekusi Login
+                  bool? cek = await controller.login();
+                  if (cek != null && cek == true) {
+                   await authC.autoLogout();
+                    Get.offAllNamed(Routes.HOME);
+                  }
                 }
               },
               child: Text(
