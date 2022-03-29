@@ -6,13 +6,16 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 class RegisterController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isHidden = true.obs;
+  TextEditingController nameC = TextEditingController(text: "andrew");
   TextEditingController emailC = TextEditingController(text: "admin@gmail.com");
   TextEditingController passC = TextEditingController(text: "admin123");
 
   SupabaseClient client = Supabase.instance.client;
 
   void signUp() async {
-    if (emailC.text.isNotEmpty && passC.text.isNotEmpty) {
+    if (nameC.text.isNotEmpty &&
+        emailC.text.isNotEmpty &&
+        passC.text.isNotEmpty) {
       // Eksekusi email dan password disini
       isLoading.value = true;
       GotrueSessionResponse response =
@@ -27,7 +30,14 @@ class RegisterController extends GetxController {
         print(response.url);
         print(response.user?.toJson());
         print(response.rawData);
-        
+
+        // insert  data user -> table users
+        await client.from("users").insert({
+          "email": emailC.text,
+          "name": nameC.text,
+          "created_at": DateTime.now().toIso8601String(),
+          "uid": response.user!.id,
+        }).execute();
         // Tanpa fitur email vertification
         Get.offAllNamed(Routes.LOGIN);
 
