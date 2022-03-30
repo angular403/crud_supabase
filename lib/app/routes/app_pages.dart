@@ -4,6 +4,8 @@ import 'package:crud_supbase/app/modules/home/bindings/home_binding.dart';
 import 'package:crud_supbase/app/modules/home/views/home_view.dart';
 import 'package:crud_supbase/app/modules/login/bindings/login_binding.dart';
 import 'package:crud_supbase/app/modules/login/views/login_view.dart';
+import 'package:crud_supbase/app/modules/profile/bindings/profile_binding.dart';
+import 'package:crud_supbase/app/modules/profile/views/profile_view.dart';
 import 'package:crud_supbase/app/modules/register/bindings/register_binding.dart';
 import 'package:crud_supbase/app/modules/register/views/register_view.dart';
 
@@ -29,6 +31,11 @@ class AppPages {
       name: _Paths.REGISTER,
       page: () => RegisterView(),
       binding: RegisterBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE,
+      page: () => ProfileView(),
+      binding: ProfileBinding(),
     ),
   ];
 }

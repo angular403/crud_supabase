@@ -16,13 +16,11 @@ class HomeView extends GetView<HomeController> {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: ()  async{
-             await controller.logout();
-            await  authC.reset();
-            Get.offAllNamed(Routes.LOGIN);
-            },
-            icon: Icon(Icons.logout),
+            onPressed: () => Get.toNamed(Routes.PROFILE),
+            icon: Icon(Icons.person),
           ),
+
+
         ],
       ),
       body: Center(
