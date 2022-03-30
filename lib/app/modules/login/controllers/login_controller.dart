@@ -6,7 +6,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 class LoginController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isHidden = true.obs;
-  TextEditingController emailC = TextEditingController(text: "admin@gmail.com");
+  TextEditingController emailC = TextEditingController(text: "wiliam@gmail.com");
   TextEditingController passC = TextEditingController(text: "admin123");
 
   SupabaseClient client = Supabase.instance.client;

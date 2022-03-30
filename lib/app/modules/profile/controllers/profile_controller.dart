@@ -38,7 +38,7 @@ class ProfileController extends GetxController {
 
   // Fitur Update Profile
 
-  void updateProfile() async {
+  Future<void> updateProfile() async {
     if (nameC.text.isNotEmpty) {
       isLoading.value = true;
       await client.from("users").update({
@@ -46,6 +46,26 @@ class ProfileController extends GetxController {
       }).match({
         "uid": client.auth.currentUser!.id,
       }).execute();
+
+      // sekalian update password
+      if (passC.text.isNotEmpty) {
+        if (passC.text.length > 6) {
+          try {
+            await client.auth.api.updateUser(
+              client.auth.currentSession!.accessToken,
+              UserAttributes(
+                password: passC.text,
+              ),
+            );
+          } catch (e) {
+            Get.snackbar("Terjadi Kesalahan", "$e");
+          }
+        } else {
+          Get.snackbar(
+              "Tidak dapat ganti password", "Password harus lebih dari 6 karakter");
+        }
+      }
+
       isLoading.value = true;
       Get.back();
     }

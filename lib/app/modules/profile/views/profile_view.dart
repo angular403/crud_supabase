@@ -100,10 +100,17 @@ class ProfileView extends GetView<ProfileController> {
                         borderRadius: BorderRadius.circular(50),
                       ),
                     ),
-                    onPressed: () {
+                    onPressed: () async{
                       if (controller.isLoading.isFalse) {
                         // Eksekusi Update Profile
-                        controller.updateProfile();
+                      await  controller.updateProfile();
+                      if(controller.passC.text.isNotEmpty && controller.passC.text.length > 6)
+                      {
+                        await controller.logout();
+                        await authC.reset();
+                        Get.offAllNamed(Routes.LOGIN);
+
+                      }
                       }
                     },
                     child: Text(
