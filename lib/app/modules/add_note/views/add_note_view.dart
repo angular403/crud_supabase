@@ -1,11 +1,14 @@
+import 'package:crud_supbase/app/modules/home/controllers/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 
 import '../controllers/add_note_controller.dart';
+import '../../home/controllers/home_controller.dart';
 
 class AddNoteView extends GetView<AddNoteController> {
+  final homeC = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,8 +42,11 @@ class AddNoteView extends GetView<AddNoteController> {
                 onPressed: () async {
                   if (controller.isLoading.isFalse) {
                     // eksekusi add note
-                     controller.addNote();
-                    Get.back();
+                    bool res = await controller.addNote();
+                    if (res == true) {
+                      await homeC.getAllNotes();
+                      Get.back();
+                    }
                   }
                 },
                 icon: Icon(Icons.save),

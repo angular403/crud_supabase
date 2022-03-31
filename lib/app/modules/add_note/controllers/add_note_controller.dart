@@ -12,7 +12,7 @@ class AddNoteController extends GetxController {
   SupabaseClient client = Supabase.instance.client;
 
   // Add Note
-  void addNote() async {
+  Future<bool> addNote() async {
     if (titleC.text.isNotEmpty && descC.text.isNotEmpty) {
       isLoading.value = true;
       PostgrestResponse<dynamic> user = await client
@@ -28,7 +28,9 @@ class AddNoteController extends GetxController {
         "created_at": DateTime.now().toIso8601String(),
       }).execute();
       isLoading.value = false;
-      Get.back();
+      return true;
+    } else {
+      return false;
     }
   }
 }
