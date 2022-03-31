@@ -19,15 +19,27 @@ class HomeView extends GetView<HomeController> {
             onPressed: () => Get.toNamed(Routes.PROFILE),
             icon: Icon(Icons.person),
           ),
-
-
         ],
       ),
-      body: Center(
-        child: Text(
-          'HomeView',
-          style: TextStyle(fontSize: 20),
-        ),
+      body: ListView.builder(
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          return ListTile(
+            onTap: () {
+              Get.toNamed(Routes.EDIT_NOTE);
+            },
+            leading: CircleAvatar(
+              child: Text("$index"),
+            ),
+            title: Text("Nama "),
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.toNamed(Routes.ADD_NOTE);
+        },
+        child: Icon(Icons.add),
       ),
     );
   }
